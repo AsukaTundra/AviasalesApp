@@ -5,7 +5,7 @@ import "./index.scss";
 import store from "./store";
 import Aviasales from "./components/app";
 
-const root = ReactDOM.createRoot(document.querySelector(".root"));
+const root = ReactDOM.createRoot(document.querySelector("#root"));
 root.render(
   <Provider store={store}>
     <Aviasales />

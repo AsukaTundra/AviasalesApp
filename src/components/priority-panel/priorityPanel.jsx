@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { useDispatch, useSelector } from "@reduxjs/toolkit";
+import { useDispatch, useSelector } from "react-redux";
 
 import { PriorityValue, ChangePriority } from "../../store/priorityReducer";
 
