@@ -1,14 +1,13 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useDispatch, useSelector } from "react-redux";
 
-import { ChangeTransfers, TransfersCheckbox } from "../../store/transfersReducer";
+import { ChangeTransfers, TransfersCheckbox } from "../../store/transfersSlice";
 
 import scss from "./transfers.module.scss";
 
 function Transfers() {
   const transfers = useSelector((state) => state.transfersPanel);
   const dispatch = useDispatch();
-
   const { all, not, one, two, three } = transfers;
   return (
     <div className={scss.transfers}>

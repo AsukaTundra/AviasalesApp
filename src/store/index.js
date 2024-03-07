@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import priorityPanel from "./priorityReducer";
-import transfersPanel from "./transfersReducer";
+import priorityPanel from "./prioritySlice";
+import transfersPanel from "./transfersSlice";
+import ticketsSlice from "./ticketsSlice";
 
-const store = configureStore({ reducer: { priorityPanel, transfersPanel } });
+const store = configureStore({ reducer: { priorityPanel, transfersPanel, ticketsSlice } });
 
 export default store;
