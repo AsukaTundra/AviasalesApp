@@ -1,0 +1,23 @@
+.divError {
+  margin: 170px 20px 0 20px;
+  padding-top: 100px;
+  width: auto;
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  background-image: url(./Vac_System_Error.png);
+  background-repeat: no-repeat;
+  background-size: 100px 100px;
+  background-position: 50% 15%;
+  border-radius: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+  .errorText {
+    margin: 30px 60px;
+    font-family: "Open Sans";
+    font-weight: 400;
+    font-size: 32px;
+  }
+}
