@@ -1,43 +1,20 @@
-import scss from "./ticket.module.scss";
-import S7logo from "./S7Logo.svg";
+import TicketDirection from "../ticket-direction";
 
-export default function Ticket() {
+import style from "./ticket.module.scss";
+import testLogo from "./test-logo.svg";
+
+export default function Ticket({ item }) {
+  const { carrier, price, segments } = item;
+
+  const elements = segments.map((elem) => <TicketDirection key={1} segments={elem} />);
+
   return (
-    <div className={scss.ticket}>
-      <div className={scss.title}>
-        <p className={scss.price}>13 400 Р</p>
-        <img className={scss.logo} src={S7logo} alt="company" />
+    <div className={style.ticket}>
+      <div className={style.title}>
+        <p className={style.price}>{price} Р</p>
+        <img className={style.logo} src={testLogo} alt={carrier} />
       </div>
-      <div className={scss.discription}>
-        <div className={scss.route}>
-          <div>
-            <p className={scss.parametr}>MOW - HKT</p>
-            <p className={scss.value}>11:20 - 00:50</p>
-          </div>
-          <div>
-            <p className={scss.parametr}>В ПУТИ</p>
-            <p className={scss.value}>21ч 15м</p>
-          </div>
-          <div>
-            <p className={scss.parametr}>2 ПЕРЕСАДКИ</p>
-            <p className={scss.value}>HKG, JNB</p>
-          </div>
-        </div>
-        <div className={scss.route}>
-          <div>
-            <p className={scss.parametr}>MOW - HKT</p>
-            <p className={scss.value}>11:20 - 00:50</p>
-          </div>
-          <div>
-            <p className={scss.parametr}>В ПУТИ</p>
-            <p className={scss.value}>21ч 15м</p>
-          </div>
-          <div>
-            <p className={scss.parametr}>2 ПЕРЕСАДКИ</p>
-            <p className={scss.value}>HKG, JNB</p>
-          </div>
-        </div>
-      </div>
+      <div className={style.discription}>{elements}</div>
     </div>
   );
 }
