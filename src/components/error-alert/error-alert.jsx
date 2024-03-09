@@ -1,4 +1,4 @@
-import style from "./errorAlert.module.scss";
+import style from "./error-alert.module.scss";
 
 export default function ErrorAlert() {
   return (
