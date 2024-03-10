@@ -1,13 +1,12 @@
 .divError {
-  margin: 170px 20px 0 20px;
-  padding-top: 100px;
+  padding-top: 80px;
   width: auto;
   min-height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: white;
-  background-image: url(./Vac_System_Error.png);
+  background-image: url(./error.png);
   background-repeat: no-repeat;
   background-size: 100px 100px;
   background-position: 50% 15%;
@@ -18,6 +17,6 @@
     margin: 30px 60px;
     font-family: "Open Sans";
     font-weight: 400;
-    font-size: 32px;
+    font-size: 24px;
   }
 }
