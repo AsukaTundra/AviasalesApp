@@ -110,10 +110,10 @@ const initialState = {
   buttons: {
     filter: {
       all: true,
-      not: false,
-      one: false,
-      two: false,
-      three: false,
+      not: true,
+      one: true,
+      two: true,
+      three: true,
     },
     sort: "",
   },
@@ -135,6 +135,7 @@ const AppSlice = createSlice({
   reducers: {
     handleSort(state, action) {
       state.buttons.sort = action.payload;
+      state.tickets.viewTickets = 5;
     },
     handleFilter(state, action) {
       if (action.payload === "all") {
@@ -145,8 +146,11 @@ const AppSlice = createSlice({
           two: !state.buttons.filter.all,
           three: !state.buttons.filter.all,
         };
+        state.tickets.viewTickets = 5;
+      } else {
+        state.buttons.filter = filterAllCheck(state.buttons.filter, action.payload);
+        state.tickets.viewTickets = 5;
       }
-      state.buttons.filter = filterAllCheck(state.buttons.filter, action.payload);
     },
     handleViewTickets(state) {
       state.tickets.viewTickets += 5;
