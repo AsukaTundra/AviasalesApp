@@ -15,6 +15,10 @@ export default function TicketDirection({ segments }) {
     return `${plusNull(startTime)} - ${plusNull(endTime)}`;
   };
 
+  const convertTime = `${Math.floor(duration / 60)}ч ${duration % 60}м`;
+
+  const stopsLength = stops.length ? `${stops.length} ПЕРЕСАДКИ` : "ПРЯМОЙ РЕЙС";
+
   return (
     <div className={style.route}>
       <div className={style.date}>
@@ -25,10 +29,10 @@ export default function TicketDirection({ segments }) {
       </div>
       <div className={style.time}>
         <p className={style.parametr}>В ПУТИ</p>
-        <p className={style.value}>{`${Math.floor(duration / 60)}ч ${duration % 60}м`}</p>
+        <p className={style.value}>{convertTime}</p>
       </div>
       <div className={style.stops}>
-        <p className={style.parametr}>{stops.length ? `${stops.length} ПЕРЕСАДКИ` : "ПРЯМОЙ РЕЙС"}</p>
+        <p className={style.parametr}>{stopsLength}</p>
         <p className={style.value}>{stops.join(", ")}</p>
       </div>
     </div>

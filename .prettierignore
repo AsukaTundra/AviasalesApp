@@ -1,8 +1,7 @@
 *.png
-*.png
 *.svg
 *.css
 *.scss
 *.modules.css
 *.html
-*.json
+.eslintrc.json

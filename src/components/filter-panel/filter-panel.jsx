@@ -1,13 +1,14 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { FilterValues, handleFilter } from "../../store/interface-slice";
+import { FilterValues, handleFilter } from "../../store/app-slice";
+import sortingTickets from "../../hooks/sorting-tickets";
 
 import style from "./filter-panel.module.scss";
 
 export default function FilterPanel() {
-  const filterState = useSelector((state) => state.InterfaceSlice.filter);
-  const dispatch = useDispatch();
+  const filterState = useSelector((state) => state.AppSlice.buttons.filter);
+
   return (
     <div className={style.panel}>
       <p className={style.title}>количество пересадок</p>
@@ -15,7 +16,7 @@ export default function FilterPanel() {
         <li className={style.item}>
           <input
             className={style.checkbox}
-            onClick={() => dispatch(handleFilter(FilterValues.ALL))}
+            onClick={() => sortingTickets(handleFilter, FilterValues.ALL)}
             checked={filterState.all}
             readOnly
             type="checkbox"
@@ -28,7 +29,7 @@ export default function FilterPanel() {
         <li className={style.item}>
           <input
             className={style.checkbox}
-            onClick={() => dispatch(handleFilter(FilterValues.NOT))}
+            onClick={() => sortingTickets(handleFilter, FilterValues.NOT)}
             checked={filterState.not}
             readOnly
             type="checkbox"
@@ -41,7 +42,7 @@ export default function FilterPanel() {
         <li className={style.item}>
           <input
             className={style.checkbox}
-            onClick={() => dispatch(handleFilter(FilterValues.ONE))}
+            onClick={() => sortingTickets(handleFilter, FilterValues.ONE)}
             checked={filterState.one}
             readOnly
             type="checkbox"
@@ -54,7 +55,7 @@ export default function FilterPanel() {
         <li className={style.item}>
           <input
             className={style.checkbox}
-            onClick={() => dispatch(handleFilter(FilterValues.TWO))}
+            onClick={() => sortingTickets(handleFilter, FilterValues.TWO)}
             checked={filterState.two}
             readOnly
             type="checkbox"
@@ -67,7 +68,7 @@ export default function FilterPanel() {
         <li className={style.item}>
           <input
             className={style.checkbox}
-            onClick={() => dispatch(handleFilter(FilterValues.THREE))}
+            onClick={() => sortingTickets(handleFilter, FilterValues.THREE)}
             checked={filterState.three}
             readOnly
             type="checkbox"

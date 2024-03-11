@@ -1,19 +1,20 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { SortValues, handleSort } from "../../store/interface-slice";
+import { SortValues, handleSort } from "../../store/app-slice";
+import sortingTickets from "../../hooks/sorting-tickets";
 
 import style from "./sorting-panel.module.scss";
 
 export default function SortingPanel() {
-  const sortState = useSelector((state) => state.InterfaceSlice);
-  const dispatch = useDispatch();
+  const sortState = useSelector((state) => state.AppSlice.buttons.sort);
+
   return (
     <div className={style.panel}>
-      <div className={`${style.item} ${sortState.sort === SortValues.CHEAP ? style.checked : null}`}>
+      <div className={`${style.item} ${sortState === SortValues.CHEAP ? style.checked : null}`}>
         <input
           className={style.button}
-          onClick={() => dispatch(handleSort(SortValues.CHEAP))}
+          onClick={() => sortingTickets(handleSort, SortValues.CHEAP)}
           type="radio"
           id="sorting-cheap"
           name="sorting-low"
@@ -23,10 +24,10 @@ export default function SortingPanel() {
           самый дешевый
         </label>
       </div>
-      <div className={`${style.item} ${sortState.sort === SortValues.FAST ? style.checked : null}`}>
+      <div className={`${style.item} ${sortState === SortValues.FAST ? style.checked : null}`}>
         <input
           className={style.button}
-          onClick={() => dispatch(handleSort(SortValues.FAST))}
+          onClick={() => sortingTickets(handleSort, SortValues.FAST)}
           type="radio"
           id="sorting-fast"
           name="sorting"
@@ -36,10 +37,10 @@ export default function SortingPanel() {
           самый быстрый
         </label>
       </div>
-      <div className={`${style.item} ${sortState.sort === SortValues.OPTIMAL ? style.checked : null}`}>
+      <div className={`${style.item} ${sortState === SortValues.OPTIMAL ? style.checked : null}`}>
         <input
           className={style.button}
-          onClick={() => dispatch(handleSort(SortValues.OPTIMAL))}
+          onClick={() => sortingTickets(handleSort, SortValues.OPTIMAL)}
           type="radio"
           id="sorting-optimal"
           name="sorting"

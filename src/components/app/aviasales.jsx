@@ -1,7 +1,7 @@
+import startRequest from "../../hooks/start-get-data";
 import FilterPanel from "../filter-panel";
 import SortingPanel from "../sorting-panel";
 import TicketsList from "../tickets-list";
-import startRequest from "../../hooks/start-request";
 
 import style from "./aviasales.module.scss";
 import logo from "./logo.png";
