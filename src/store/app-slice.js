@@ -13,8 +13,8 @@ export const SortValues = {
   OPTIMAL: "optimal",
 };
 
-const filterAllOnOff = (state, item) => {
-  const newStateFilter = { ...state, [item]: !state[item] };
+const filterAllCheck = (state, parametr) => {
+  const newStateFilter = { ...state, [parametr]: !state[parametr] };
   const { not, one, two, three } = newStateFilter;
   newStateFilter.all = not && one && two && three ? (newStateFilter.all = true) : (newStateFilter.all = false);
   return newStateFilter;
@@ -43,7 +43,7 @@ const doFilteredTickets = (tickets, filter) => {
 
 const doSortingTickets = (tickets, sort) => {
   if (sort === SortValues.CHEAP) {
-    return tickets.sort(function cheap(a, b) {
+    return tickets.sort((a, b) => {
       if (a.price > b.price) {
         return 1;
       }
@@ -54,7 +54,7 @@ const doSortingTickets = (tickets, sort) => {
     });
   }
   if (sort === SortValues.FAST) {
-    return tickets.sort(function fast(a, b) {
+    return tickets.sort((a, b) => {
       if (a.segments[0].duration + a.segments[1].duration > b.segments[0].duration + b.segments[1].duration) {
         return 1;
       }
@@ -65,7 +65,7 @@ const doSortingTickets = (tickets, sort) => {
     });
   }
   if (sort === SortValues.OPTIMAL) {
-    return tickets.sort(function optimal(a, b) {
+    return tickets.sort((a, b) => {
       if (
         a.segments[0].duration + a.segments[1].duration + a.price >
         b.segments[0].duration + b.segments[1].duration + b.price
@@ -84,14 +84,14 @@ const doSortingTickets = (tickets, sort) => {
   return tickets;
 };
 
-export const thunkSorting = createAsyncThunk("thunkSorting", async (getState) => {
+export const thunkAsyncSorting = createAsyncThunk("thunkAsyncSorting", async (getState) => {
   let sortingTickets = getState().AppSlice.tickets.tickets;
   sortingTickets = doFilteredTickets(sortingTickets, getState().AppSlice.buttons.filter);
   sortingTickets = doSortingTickets(sortingTickets, getState().AppSlice.buttons.sort);
   return sortingTickets.slice(0, getState().AppSlice.tickets.viewTickets);
 });
 
-export const thunkRequest = createAsyncThunk("thunkRequest", async (getState, { rejectWithValue }) => {
+export const thunkAsyncRequest = createAsyncThunk("thunkAsyncRequest", async (getState, { rejectWithValue }) => {
   const { searchId } = getState().AppSlice.tickets;
   try {
     const response = searchId
@@ -146,14 +146,14 @@ const AppSlice = createSlice({
           three: !state.buttons.filter.all,
         };
       }
-      state.buttons.filter = filterAllOnOff(state.buttons.filter, action.payload);
+      state.buttons.filter = filterAllCheck(state.buttons.filter, action.payload);
     },
     handleViewTickets(state) {
       state.tickets.viewTickets += 5;
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(thunkRequest.fulfilled, (state, action) => {
+    builder.addCase(thunkAsyncRequest.fulfilled, (state, action) => {
       if (action.payload.searchId) {
         state.tickets.searchId = action.payload.searchId;
       } else if (!action.payload.stop) {
@@ -163,17 +163,17 @@ const AppSlice = createSlice({
         state.tickets.stop = action.payload.stop;
       }
     });
-    builder.addCase(thunkRequest.rejected, (state, action) => {
+    builder.addCase(thunkAsyncRequest.rejected, (state, action) => {
       if (action.payload === "server error") {
         state.tickets.serverErrors.push(action.payload);
       } else {
         state.tickets.error = action.payload;
       }
     });
-    builder.addCase(thunkSorting.fulfilled, (state, action) => {
+    builder.addCase(thunkAsyncSorting.fulfilled, (state, action) => {
       state.tickets.sortingTickets = action.payload;
     });
-    builder.addCase(thunkSorting.rejected, (state, action) => {
+    builder.addCase(thunkAsyncSorting.rejected, (state, action) => {
       state.tickets.error = action.error;
     });
   },

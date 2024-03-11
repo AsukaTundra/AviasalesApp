@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import { useSelector } from "react-redux";
 
 import { SortValues, handleSort } from "../../store/app-slice";
@@ -16,11 +15,11 @@ export default function SortingPanel() {
           className={style.button}
           onClick={() => sortingTickets(handleSort, SortValues.CHEAP)}
           type="radio"
-          id="sorting-cheap"
-          name="sorting-low"
+          id="cheap"
+          name="sorting"
           value="low"
         />
-        <label className={style.text} htmlFor="sorting-cheap">
+        <label className={style.text} htmlFor="cheap">
           самый дешевый
         </label>
       </div>
@@ -29,11 +28,11 @@ export default function SortingPanel() {
           className={style.button}
           onClick={() => sortingTickets(handleSort, SortValues.FAST)}
           type="radio"
-          id="sorting-fast"
+          id="fast"
           name="sorting"
           value="fast"
         />
-        <label className={style.text} htmlFor="sorting-fast">
+        <label className={style.text} htmlFor="fast">
           самый быстрый
         </label>
       </div>
@@ -42,11 +41,11 @@ export default function SortingPanel() {
           className={style.button}
           onClick={() => sortingTickets(handleSort, SortValues.OPTIMAL)}
           type="radio"
-          id="sorting-optimal"
+          id="optimal"
           name="sorting"
           value="optimal"
         />
-        <label className={style.text} htmlFor="sorting-optimal">
+        <label className={style.text} htmlFor="optimal">
           оптимальный
         </label>
       </div>

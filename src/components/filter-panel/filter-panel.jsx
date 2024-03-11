@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import { useSelector } from "react-redux";
 
 import { FilterValues, handleFilter } from "../../store/app-slice";
@@ -20,9 +19,9 @@ export default function FilterPanel() {
             checked={filterState.all}
             readOnly
             type="checkbox"
-            id="transfer-all"
+            id="all"
           />
-          <label className={style.text} htmlFor="transfer-all">
+          <label className={style.text} htmlFor="all">
             Все
           </label>
         </li>
@@ -33,9 +32,9 @@ export default function FilterPanel() {
             checked={filterState.not}
             readOnly
             type="checkbox"
-            id="transfer-not"
+            id="not"
           />
-          <label className={style.text} htmlFor="transfer-not">
+          <label className={style.text} htmlFor="not">
             Без пересадок
           </label>
         </li>
@@ -46,9 +45,9 @@ export default function FilterPanel() {
             checked={filterState.one}
             readOnly
             type="checkbox"
-            id="transfer-one"
+            id="one"
           />
-          <label className={style.text} htmlFor="transfer-one">
+          <label className={style.text} htmlFor="one">
             1 пересадка
           </label>
         </li>
@@ -59,9 +58,9 @@ export default function FilterPanel() {
             checked={filterState.two}
             readOnly
             type="checkbox"
-            id="transfer-two"
+            id="two"
           />
-          <label className={style.text} htmlFor="transfer-two">
+          <label className={style.text} htmlFor="two">
             2 пересадки
           </label>
         </li>
@@ -72,9 +71,9 @@ export default function FilterPanel() {
             checked={filterState.three}
             readOnly
             type="checkbox"
-            id="transfer-three"
+            id="three"
           />
-          <label className={style.text} htmlFor="transfer-three">
+          <label className={style.text} htmlFor="three">
             3 пересадки
           </label>
         </li>
