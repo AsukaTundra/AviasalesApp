@@ -9,16 +9,27 @@
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr;
   }
+
+  :hover{
+    background-color: rgb(240, 240, 240);
+  }
+
+  &:hover .checked {
+    background-color: rgb(33,150,243);
+
+    .text {
+      background-color: rgb(33,150,243);;
+    }
+  }
 }
 
 .item {
-  padding-top: 20px;
   border-width: 1px;
   border-style: solid;
   border-color: rgb(175, 175, 175);
   background-color: white;
   text-align: center;
-
+  
   @media (min-width: 560px) {
     &:first-child {
       border-radius: 10px 0 0 10px;
@@ -31,9 +42,7 @@
     }
   }
 
-  @media (max-width: 560px) {
-    padding: 15px;
-    
+  @media (max-width: 560px) {    
     &:first-child {
       border-radius: 10px 10px 0 0;
       border-bottom: none;
@@ -52,11 +61,16 @@
   }
   
   .text {
+    padding-top: 20px;
     font-family: "Open Sans";
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
     color: #4A4A4A;
+    display: inline-block;
+    min-height: 35px;
+    width: 100%;
+    border-radius: 10px;
   }
 
 }

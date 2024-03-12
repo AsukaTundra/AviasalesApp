@@ -10,6 +10,8 @@ const container = (text) => {
   );
 };
 
+/* альтернативные контейнеры заместо тикетов */
+
 export const noResult = container("таких билетов у нас нет :(");
 
 export const error = container("ошибка, загляни чуть позже :)");

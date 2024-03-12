@@ -3,6 +3,8 @@ import store from "../store/index";
 
 import sortingTickets from "./sorting-tickets";
 
+/* хук запуска запросов на билеты */
+
 const startRequest = async () => {
   const { stop, serverErrors, error } = store.getState().AppSlice.tickets;
   if (!stop && serverErrors.length < 10 && error === null) {

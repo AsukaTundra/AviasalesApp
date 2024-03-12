@@ -21,6 +21,8 @@ export default function TicketsList() {
     </button>
   );
 
+  /* условный рендер */
+
   let content =
     ticketsState.sortingTickets.length === 0 ? (
       noResult

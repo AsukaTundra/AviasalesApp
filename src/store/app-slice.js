@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+/* экспорт допустим значений для передачи в reducer */
+
 export const FilterValues = {
   ALL: "all",
   NOT: "not",
@@ -13,12 +15,16 @@ export const SortValues = {
   OPTIMAL: "optimal",
 };
 
+/* функция расчета кнопки all */
+
 const filterAllCheck = (state, parametr) => {
   const newStateFilter = { ...state, [parametr]: !state[parametr] };
   const { not, one, two, three } = newStateFilter;
   newStateFilter.all = not && one && two && three ? (newStateFilter.all = true) : (newStateFilter.all = false);
   return newStateFilter;
 };
+
+/* функции фильтрации и сортировки */
 
 const doFilteredTickets = (tickets, filter) => {
   return tickets.filter((ticket) => {
@@ -84,6 +90,8 @@ const doSortingTickets = (tickets, sort) => {
   return tickets;
 };
 
+/* асинхронные функции запросов к серверу и фильтрации */
+
 export const thunkAsyncSorting = createAsyncThunk("thunkAsyncSorting", async (getState) => {
   let sortingTickets = getState().AppSlice.tickets.tickets;
   sortingTickets = doFilteredTickets(sortingTickets, getState().AppSlice.buttons.filter);
@@ -105,6 +113,8 @@ export const thunkAsyncRequest = createAsyncThunk("thunkAsyncRequest", async (ge
     return rejectWithValue(error.message);
   }
 });
+
+/* reducer */
 
 const initialState = {
   buttons: {

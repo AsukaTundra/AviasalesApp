@@ -7,7 +7,7 @@ import style from "./aviasales.module.scss";
 import logo from "./logo.png";
 
 export default function Aviasales() {
-  startRequest();
+  startRequest(); /* вызов начала загрузки данных */
 
   return (
     <div className={style.app}>
