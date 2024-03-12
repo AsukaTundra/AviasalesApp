@@ -3,10 +3,10 @@ import TicketDirection from "../ticket-direction";
 import style from "./ticket.module.scss";
 
 export default function Ticket({ item }) {
-  const { carrier, price, segments } = item;
+  const { carrier, price, segments, key: ticketKey } = item;
 
   const convertDiscription = segments.map((elem, index) => {
-    const key = index + elem.duration;
+    const key = index + ticketKey;
     return <TicketDirection key={key} segments={elem} />;
   });
 

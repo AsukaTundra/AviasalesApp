@@ -138,6 +138,7 @@ const AppSlice = createSlice({
       state.tickets.viewTickets = 5;
     },
     handleFilter(state, action) {
+      state.tickets.viewTickets = 5;
       if (action.payload === "all") {
         state.buttons.filter = {
           all: !state.buttons.filter.all,
@@ -146,10 +147,8 @@ const AppSlice = createSlice({
           two: !state.buttons.filter.all,
           three: !state.buttons.filter.all,
         };
-        state.tickets.viewTickets = 5;
       } else {
         state.buttons.filter = filterAllCheck(state.buttons.filter, action.payload);
-        state.tickets.viewTickets = 5;
       }
     },
     handleViewTickets(state) {

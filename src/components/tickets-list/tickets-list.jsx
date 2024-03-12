@@ -12,7 +12,7 @@ export default function TicketsList() {
 
   const tickets = ticketsState.sortingTickets.map((item, index) => {
     const key = index + item.carrier;
-    return <Ticket key={key} item={item} />;
+    return <Ticket key={key} item={{ ...item, key }} />;
   });
 
   const button = (
