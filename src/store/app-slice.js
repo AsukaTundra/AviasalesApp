@@ -92,27 +92,38 @@ const doSortingTickets = (tickets, sort) => {
 
 /* асинхронные функции запросов к серверу и фильтрации */
 
-export const thunkAsyncSorting = createAsyncThunk("thunkAsyncSorting", async (getState) => {
+export const thunkAsyncSorting = createAsyncThunk("thunkAsyncSorting", async function Sorting(qwe, { getState }) {
   let sortingTickets = getState().AppSlice.tickets.tickets;
   sortingTickets = doFilteredTickets(sortingTickets, getState().AppSlice.buttons.filter);
   sortingTickets = doSortingTickets(sortingTickets, getState().AppSlice.buttons.sort);
   return sortingTickets.slice(0, getState().AppSlice.tickets.viewTickets);
 });
 
-export const thunkAsyncRequest = createAsyncThunk("thunkAsyncRequest", async (getState, { rejectWithValue }) => {
-  const { searchId } = getState().AppSlice.tickets;
-  try {
-    const response = searchId
-      ? await fetch(`https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`)
-      : await fetch("https://aviasales-test-api.kata.academy/search");
-    if (response.ok) {
-      return await response.json();
+export const thunkAsyncRequest = createAsyncThunk(
+  "thunkAsyncRequest",
+  async function Request(don, { rejectWithValue, dispatch, getState }) {
+    const { searchId, stop, serverErrors, error } = getState().AppSlice.tickets;
+
+    if (!stop && serverErrors.length < 10 && error === null) {
+      try {
+        const response = searchId
+          ? await fetch(`https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`)
+          : await fetch("https://aviasales-test-api.kata.academy/search");
+        setTimeout(() => dispatch(thunkAsyncRequest()), 0);
+        setTimeout(() => dispatch(thunkAsyncSorting()), 0);
+        if (response.ok) {
+          const result = await response.json();
+          return result;
+        }
+        throw new Error("server error");
+      } catch (err) {
+        return rejectWithValue(err.message);
+      }
+    } else {
+      return "stop";
     }
-    return rejectWithValue("server error");
-  } catch (error) {
-    return rejectWithValue(error.message);
   }
-});
+);
 
 /* reducer */
 
@@ -169,10 +180,13 @@ const AppSlice = createSlice({
     builder.addCase(thunkAsyncRequest.fulfilled, (state, action) => {
       if (action.payload.searchId) {
         state.tickets.searchId = action.payload.searchId;
-      } else if (!action.payload.stop) {
-        state.tickets.tickets.push(...action.payload.tickets);
+      }
+      if (action.payload.stop === false) {
         state.tickets.loading = false;
-      } else if (action.payload.stop) {
+        state.tickets.tickets.push(...action.payload.tickets);
+      }
+      if (action.payload.stop === true) {
+        state.tickets.tickets.push(...action.payload.tickets);
         state.tickets.stop = action.payload.stop;
       }
     });

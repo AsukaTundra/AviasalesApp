@@ -1,5 +1,7 @@
-import startRequest from "../../hooks/start-get-data";
+import { useDispatch } from "react-redux";
+
 import FilterPanel from "../filter-panel";
+import { thunkAsyncRequest } from "../../store/app-slice";
 import SortingPanel from "../sorting-panel";
 import TicketsList from "../tickets-list";
 
@@ -7,7 +9,8 @@ import style from "./aviasales.module.scss";
 import logo from "./logo.png";
 
 export default function Aviasales() {
-  startRequest(); /* вызов начала загрузки данных */
+  const dispatch = useDispatch();
+  dispatch(thunkAsyncRequest(1));
 
   return (
     <div className={style.app}>
