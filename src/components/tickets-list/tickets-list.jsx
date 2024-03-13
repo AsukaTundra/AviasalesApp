@@ -1,13 +1,13 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { handleViewTickets } from "../../store/app-slice";
-import sortingTickets from "../../hooks/sorting-tickets";
 import { error, loader, noResult } from "../instread-tickets/instread-tickets";
 import Ticket from "../ticket";
 
 import style from "./tickets-list.module.scss";
 
 export default function TicketsList() {
+  const dispatch = useDispatch();
   const { tickets: ticketsState } = useSelector((state) => state.AppSlice);
 
   const tickets = ticketsState.sortingTickets.map((item, index) => {
@@ -16,7 +16,7 @@ export default function TicketsList() {
   });
 
   const button = (
-    <button className={style.button} onClick={() => sortingTickets(handleViewTickets)} type="button">
+    <button className={style.button} onClick={() => dispatch(handleViewTickets())} type="button">
       показать еще 5 билетов!
     </button>
   );
@@ -32,6 +32,7 @@ export default function TicketsList() {
         {button}
       </>
     );
+
   if (ticketsState.loading) {
     content = loader;
   }

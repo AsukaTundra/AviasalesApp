@@ -14,13 +14,11 @@ export default function Ticket({ item }) {
   convertPrice.splice(3, 0, " ");
   convertPrice.reverse();
 
-  const urlLogo = `https://pics.avs.io/99/36/${carrier}.png`;
-
   return (
     <div className={style.ticket}>
       <div className={style.title}>
         <p className={style.price}>{convertPrice} Р</p>
-        <img className={style.logo} src={urlLogo} alt={carrier} />
+        <img className={style.logo} src={`https://pics.avs.io/99/36/${carrier}.png`} alt={carrier} />
       </div>
       <div className={style.discription}>{convertDiscription}</div>
     </div>

@@ -92,7 +92,7 @@ const doSortingTickets = (tickets, sort) => {
 
 /* асинхронные функции запросов к серверу и фильтрации */
 
-export const thunkAsyncSorting = createAsyncThunk("thunkAsyncSorting", async function Sorting(qwe, { getState }) {
+export const thunkAsyncSorting = createAsyncThunk("thunkAsyncSorting", async function Sorting(what, { getState }) {
   let sortingTickets = getState().AppSlice.tickets.tickets;
   sortingTickets = doFilteredTickets(sortingTickets, getState().AppSlice.buttons.filter);
   sortingTickets = doSortingTickets(sortingTickets, getState().AppSlice.buttons.sort);
@@ -101,7 +101,7 @@ export const thunkAsyncSorting = createAsyncThunk("thunkAsyncSorting", async fun
 
 export const thunkAsyncRequest = createAsyncThunk(
   "thunkAsyncRequest",
-  async function Request(don, { rejectWithValue, dispatch, getState }) {
+  async function Request(what, { rejectWithValue, getState }) {
     const { searchId, stop, serverErrors, error } = getState().AppSlice.tickets;
 
     if (!stop && serverErrors.length < 10 && error === null) {
@@ -109,8 +109,6 @@ export const thunkAsyncRequest = createAsyncThunk(
         const response = searchId
           ? await fetch(`https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`)
           : await fetch("https://aviasales-test-api.kata.academy/search");
-        setTimeout(() => dispatch(thunkAsyncRequest()), 0);
-        setTimeout(() => dispatch(thunkAsyncSorting()), 0);
         if (response.ok) {
           const result = await response.json();
           return result;

@@ -1,11 +1,11 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { SortValues, handleSort } from "../../store/app-slice";
-import sortingTickets from "../../hooks/sorting-tickets";
 
 import style from "./sorting-panel.module.scss";
 
 export default function SortingPanel() {
+  const dispatch = useDispatch();
   const sortState = useSelector((state) => state.AppSlice.buttons.sort);
 
   return (
@@ -13,7 +13,7 @@ export default function SortingPanel() {
       <div className={`${style.item} ${sortState === SortValues.CHEAP ? style.checked : null}`}>
         <input
           className={style.button}
-          onClick={() => sortingTickets(handleSort, SortValues.CHEAP)}
+          onClick={() => dispatch(handleSort(SortValues.CHEAP))}
           type="radio"
           id="cheap"
           name="sorting"
@@ -26,7 +26,7 @@ export default function SortingPanel() {
       <div className={`${style.item} ${sortState === SortValues.FAST ? style.checked : null}`}>
         <input
           className={style.button}
-          onClick={() => sortingTickets(handleSort, SortValues.FAST)}
+          onClick={() => dispatch(handleSort(SortValues.FAST))}
           type="radio"
           id="fast"
           name="sorting"
@@ -39,7 +39,7 @@ export default function SortingPanel() {
       <div className={`${style.item} ${sortState === SortValues.OPTIMAL ? style.checked : null}`}>
         <input
           className={style.button}
-          onClick={() => sortingTickets(handleSort, SortValues.OPTIMAL)}
+          onClick={() => dispatch(handleSort(SortValues.OPTIMAL))}
           type="radio"
           id="optimal"
           name="sorting"

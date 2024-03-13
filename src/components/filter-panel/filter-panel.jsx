@@ -1,11 +1,11 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { FilterValues, handleFilter } from "../../store/app-slice";
-import sortingTickets from "../../hooks/sorting-tickets";
 
 import style from "./filter-panel.module.scss";
 
 export default function FilterPanel() {
+  const dispatch = useDispatch();
   const filterState = useSelector((state) => state.AppSlice.buttons.filter);
 
   return (
@@ -15,7 +15,7 @@ export default function FilterPanel() {
         <li className={style.item}>
           <input
             className={style.checkbox}
-            onClick={() => sortingTickets(handleFilter, FilterValues.ALL)}
+            onClick={() => dispatch(handleFilter(FilterValues.ALL))}
             checked={filterState.all}
             readOnly
             type="checkbox"
@@ -28,7 +28,7 @@ export default function FilterPanel() {
         <li className={style.item}>
           <input
             className={style.checkbox}
-            onClick={() => sortingTickets(handleFilter, FilterValues.NOT)}
+            onClick={() => dispatch(handleFilter(FilterValues.NOT))}
             checked={filterState.not}
             readOnly
             type="checkbox"
@@ -41,7 +41,7 @@ export default function FilterPanel() {
         <li className={style.item}>
           <input
             className={style.checkbox}
-            onClick={() => sortingTickets(handleFilter, FilterValues.ONE)}
+            onClick={() => dispatch(handleFilter(FilterValues.ONE))}
             checked={filterState.one}
             readOnly
             type="checkbox"
@@ -54,7 +54,7 @@ export default function FilterPanel() {
         <li className={style.item}>
           <input
             className={style.checkbox}
-            onClick={() => sortingTickets(handleFilter, FilterValues.TWO)}
+            onClick={() => dispatch(handleFilter(FilterValues.TWO))}
             checked={filterState.two}
             readOnly
             type="checkbox"
@@ -67,7 +67,7 @@ export default function FilterPanel() {
         <li className={style.item}>
           <input
             className={style.checkbox}
-            onClick={() => sortingTickets(handleFilter, FilterValues.THREE)}
+            onClick={() => dispatch(handleFilter(FilterValues.THREE))}
             checked={filterState.three}
             readOnly
             type="checkbox"

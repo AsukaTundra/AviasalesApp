@@ -1,7 +1,8 @@
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
+import { thunkAsyncRequest, thunkAsyncSorting } from "../../store/app-slice";
 import FilterPanel from "../filter-panel";
-import { thunkAsyncRequest } from "../../store/app-slice";
 import SortingPanel from "../sorting-panel";
 import TicketsList from "../tickets-list";
 
@@ -10,7 +11,17 @@ import logo from "./logo.png";
 
 export default function Aviasales() {
   const dispatch = useDispatch();
-  dispatch(thunkAsyncRequest(1));
+  const { buttons: buttonsState, tickets: ticketsState } = useSelector((state) => state.AppSlice);
+  const { serverErrors, error, searchId, tickets, viewTickets } = ticketsState;
+  const { filter, sort } = buttonsState;
+
+  useEffect(() => {
+    dispatch(thunkAsyncSorting());
+  }, [tickets, filter, sort, viewTickets]);
+
+  useEffect(() => {
+    dispatch(thunkAsyncRequest());
+  }, [serverErrors, error, searchId, tickets]);
 
   return (
     <div className={style.app}>
